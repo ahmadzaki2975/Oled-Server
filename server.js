@@ -1,0 +1,22 @@
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server, {cors: {origin: "*"}});
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.get("/", (req,res) => {
+  res.send("<h1>OLED SERVER BECAUSE WHY NOT</h1>");
+})
+
+app.post("/data", (req,res) => {
+  const data = req.body;
+  console.log("data received: ", data);
+  res.send("Success")
+  io.emit("data", data);
+})
+
+server.listen(5000, () => {
+  console.log("Server is running on port 5000");
+});
