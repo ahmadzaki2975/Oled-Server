@@ -13,6 +13,7 @@ app.get("/", (req,res) => {
 app.post("/data", (req,res) => {
   const data = req.body;
   console.log("data received: ", data);
+  res.statusCode = 200;
   res.send("Success")
   io.emit("data", data);
 })
