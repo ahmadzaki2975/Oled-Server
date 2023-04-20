@@ -18,6 +18,14 @@ app.post("/data", (req,res) => {
   io.emit("data", data);
 })
 
+app.post("/alarm", (req, res) => {
+  const data = req.body;
+  console.log("alarm received: ", data);
+  res.statusCode = 200;
+  res.send("Success")
+  io.emit("alarm", data); 
+})
+
 server.listen(5000, () => {
   console.log("Server is running on port 5000");
 });
